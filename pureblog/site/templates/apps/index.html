@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<div class="content-body">
+	<div class="container">
+		<div class="row">
+			<main class="col-md-8">
+				{% for article in article_list %}
+				<article class="post post-4">
+					<header class="entry-header">
+						<h1 class="entry-title">
+							<a href="{% url 'detail' article.id %}">{{ article.title }}</a>
+						</h1>
+						<div class="entry-meta">
+							<span class="post-category"><a href="{% url 'catview' article.category.name %}">{{ article.category.name }}</a></span>
+	
+							<span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ article.last_modified_time }}</time></a></span>
+	
+							<span class="post-author">张鹏<a href="#"></a></span>
+
+							<span class="post-author">浏览次数{{ article.views }}<a href="#"></a></span>
+						</div>
+					</header>
+					<div class="entry-content clearfix">
+						<p>{{ article.abstract }}</p>
+						<div class="read-more cl-effect-14">
+							<a href="{% url 'detail' article.id %}" class="more-link">Continue reading <span class="meta-nav">→</span></a>
+						</div>
+					</div>
+				</article>
+				{% endfor %}
+				<div>
+					<span>
+			            {% if page_obj.has_previous %}
+			                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+			            {% endif %}
+
+			            <span class="current">
+			                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+			            </span>
+
+			            {% if page_obj.has_next %}
+			                <a href="?page={{ page_obj.next_page_number }}">next</a>
+			            {% endif %}
+			        </span>
+				</div>
+			</main>
+			{% block aside %}
+				{% include 'apps/sidebar.html' %}
+			{% endblock %}
+		</div>
+	</div>
+</div>
+{% endblock %}

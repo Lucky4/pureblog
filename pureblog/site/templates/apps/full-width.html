@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<div class="content-body">
+	<div class="container">
+		<div class="row">
+			<main class="col-md-12">
+				{% for article in article_list %}
+				<article class="post post-1">
+					<header class="entry-header">
+						<h1 class="entry-title">
+							<a href="{% url 'detail' article.id %}">{{ article.title }}</a>
+						</h1>
+						<div class="entry-meta">
+	
+							<span class="post-date"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ article.last_modified_time }}</time></span>
+	
+						</div>
+					</header>
+				</article>
+				{% endfor %}
+			</main>
+		</div>
+	</div>
+</div>
+{% endblock %}
